@@ -1,21 +1,57 @@
+<!DOCTYPE html>
+
 <html>
-  <body>
-    <h3 id="total">Grand total: $0</h3>
-    <input id="item-name-input" placeholder="Item name">
-    <input id="item-price-input" placeholder="Item price">
-    <button id="add" onclick="addItem()">Add</button>
-    <table>
-      <tr>
-        <th>Item</th>
-        <th>Price</th>
-      </tr>
-      <tr>
-        <td id="item"></td>
-        <td id="price"></td>
-      </tr>
-    </table>
-     <script src="script.js">  
+
+<head>
+	<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+	<!-- the entire body must be written by student -->
+  <div>
+  <label for="item-name-input">Item name:</label>
+  <input type="text" id="item-name-input" aria-label="Enter item name">
+  <label for="item-price-input">Price:</label>
+  <input type="number" id="item-price-input" aria-label="Enter item price">
+  <button id="add" aria-label="add item to list" onclick="addItem()">Add</button>
+</div>
+
+<table id="shopping-list" aria-label="Shopping list">
+  <tr>
+    <th id="item" scope="col">Item</th>
+    <th id="price" scope="col">Price</th>
+  </tr>
+  <tr>
+    <td>Grand Total</td>
+    <td id="total">0</td>
+  </tr>
+</table>
+
+<script>
+  let total = 0;
+  function addItem() {
+    const name = document.getElementById("item-name-input").value;
+    const price = document.getElementById("item-price-input").value;
+    if (name.trim() === "" || price.trim() === "") {
+      alert("Invalid input. Please enter both item name and price.");
+      return;
+    }
+    const table = document.getElementById("shopping-list");
+    const newRow = table.insertRow(-1);
+    const nameCell = newRow.insertCell(0);
+    const priceCell = newRow.insertCell(1);
+    nameCell.innerHTML = name;
+    priceCell.innerHTML = price;
+    total += parseFloat(price);
+    document.getElementById("total").innerHTML = total;
+    document.getElementById("item-name-input").value = "";
+    document.getElementById("item-price-input").value = "";
+  }
 </script>
-    
-  </body>
+
+    <script type="text/javascript" src="./script.js">
+</script>
+
+</body>
+
 </html>
